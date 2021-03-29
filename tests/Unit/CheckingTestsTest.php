@@ -13,6 +13,6 @@ class CheckingTestsTest extends TestCase
 
     public function testsAreWorking2(): void
     {
-        $this->assertFalse(false);
+        $this->assertFalse(true);
     }
 }
