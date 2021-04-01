@@ -50,7 +50,6 @@ jobs:
                     username: ${{ secrets.REMOTE_USER }}
                     key: ${{ secrets.SERVER_SSH_KEY }}
                     passphrase: ''
-                    rm: true
                     source: "./"
                     target: ${{ secrets.REMOTE_TARGET }}
             # Run commands on production
