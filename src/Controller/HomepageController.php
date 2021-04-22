@@ -17,4 +17,12 @@ class HomepageController extends AbstractController
             'controller_name' => 'HomepageController',
         ]);
     }
+
+    /**
+     * @Route("/test", name="homepage")
+     */
+    public function test()
+    {
+        return new Response('Test');
+    }
 }
