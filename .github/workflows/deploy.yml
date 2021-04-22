@@ -69,5 +69,5 @@ jobs:
                     passphrase: ''
                     script: |
                         rsync -a --exclude={'var','temp'} --delete ${{ secrets.REMOTE_TARGET }} ${{ secrets.REMOTE_TARGET_DEPLOY }}
-                        docker exec -ti translator_php-fpm_1 bin/console cache:clear
+                        docker exec -t translator_php-fpm_1 bin/console cache:clear
                     
