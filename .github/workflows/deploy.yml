@@ -1,7 +1,9 @@
 # Based on this tutorial: https://github.com/marketplace/actions/ssh-deploy
 name: SSH Deploy
 on:
-    workflow_dispatch:
+    push:
+        branches:
+            - master
 jobs:
     build:
         runs-on: ubuntu-20.04
