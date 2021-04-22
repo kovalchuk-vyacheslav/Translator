@@ -1,6 +1,5 @@
 ### custom
 /.idea
-/docker/logs/
 ### custom
 
 ###> symfony/framework-bundle ###
