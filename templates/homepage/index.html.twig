@@ -1,33 +1,53 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomepageController!{% endblock %}
+{% block title %}Translator{% endblock %}
 
 {% block body %}
-    <style>
-        .example-wrapper {
-            margin: 1em auto;
-            max-width: 800px;
-            width: 95%;
-            font: 18px/1.5 sans-serif;
-        }
+    {{ form(form) }}
 
-        .example-wrapper code {
-            background: #F5F5F5;
-            padding: 2px 6px;
-        }
-    </style>
+    {% if formattedText is defined %}
+        <div id="formatted-text">
+            {{ formattedText|raw }}
+        </div>
+    {% endif %}
 
-    <div class="example-wrapper">
-        <h1>Hello {{ controller_name }}! ✅</h1>
+{% endblock %}
 
-        This friendly message is coming from:
-        <ul>
-            <li>Your controller at
-                <code><a href="{{ '/Users/kovalchuk_vyacheslav/Projects/translator/src/Controller/HomepageController.php'|file_link(0) }}">src/Controller/HomepageController.php</a></code>
-            </li>
-            <li>Your template at
-                <code><a href="{{ '/Users/kovalchuk_vyacheslav/Projects/translator/templates/homepage/index.html.twig'|file_link(0) }}">templates/homepage/index.html.twig</a></code>
-            </li>
-        </ul>
-    </div>
+{% block body_javascripts %}
+    <script>
+        $(() => {
+            const translationPath = '{{ path('translate') }}';
+            const formattedText = $('#formatted-text');
+
+            if (!formattedText.length) {
+                return;
+            }
+
+            formattedText.on('click', (e) => {
+                if (e.target.tagName.toLowerCase() === 'span') {
+                    const span = e.target;
+                    const word = span.innerText;
+                    const url = `${translationPath}?word=${word}`;
+
+                    axios.get(url)
+                        .then((response) => {
+                            if (response.data.translation) {
+                                const $span = $(span).popover({
+                                    content: response.data.translation
+                                });
+
+                                $span.popover('show');
+
+                                $('body').on('click', function hidePopover(e) {
+                                    if (!$(e.target).parents('.popover').length) {
+                                        $span.popover('hide');
+                                        $('body').off('click', hidePopover);
+                                    }
+                                });
+                            }
+                        });
+                }
+            });
+        });
+    </script>
 {% endblock %}

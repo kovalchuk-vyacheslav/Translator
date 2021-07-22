@@ -1,0 +1,13 @@
+#translated_text_originalText {
+    height: 50vh;
+}
+
+#formatted-text span {
+    background: lightyellow;
+}
+
+#formatted-text span:hover {
+    background: yellow;
+
+    cursor: pointer;
+}

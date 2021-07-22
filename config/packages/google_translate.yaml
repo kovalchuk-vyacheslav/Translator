@@ -1,0 +1,2 @@
+pryon_google_translator:
+    google_api_key: '%env(GOOGLE_API_KEY)%'
